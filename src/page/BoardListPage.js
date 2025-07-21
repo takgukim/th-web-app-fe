@@ -9,12 +9,21 @@ function BoardListPage() {
   const [subject, setSubject] = useState('');
   const [content, setContent] = useState('');
 
+  const query = {
+    "start_page" : 0,
+    "per_page" : 10,
+    "board_type" : "free",
+  };
+
+  const findAllUrl = new URL("http://localhost:8080/api/boards");
+  findAllUrl.search = new URLSearchParams(query).toString();
+
   useEffect(() => {
     findAllBoard();
   }, []);
 
   const findAllBoard = () => {
-    fetch("http://localhost:8080/api/boards?start_page=0&per_page=10")
+    fetch(findAllUrl)
       .then(res => res.json())
       .then(data => setBoards(data));
   };
@@ -23,7 +32,13 @@ function BoardListPage() {
     fetch("http://localhost:8080/api/boards", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ writer, subject, content })
+      body: JSON.stringify({ 
+        "writer" : writer, 
+        "subject" : subject,
+        "content" : content ,
+        "board_type" : "free",
+
+      })
     })
       .then(res => res.json())
       .then(() => {

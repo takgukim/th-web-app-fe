@@ -24,7 +24,12 @@ function BoardWritePage() {
     fetch(`http://localhost:8080/api/boards/${idx}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ writer, subject, content })
+      body: JSON.stringify({ 
+        "writer" : writer, 
+        "subject" : subject, 
+        "content" : content,
+        "board_type" : "free",
+      })
     })
       .then(res => res.json())
       .then(() => navigate('/'));
