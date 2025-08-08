@@ -12,7 +12,7 @@ function BoardListPage() {
   const query = {
     "start_page" : 0,
     "per_page" : 10,
-    "board_type" : "free",
+    "board_type" : "notice",
   };
 
   const findAllUrl = new URL("http://localhost:8080/api/boards");
@@ -36,7 +36,7 @@ function BoardListPage() {
         "writer" : writer, 
         "subject" : subject,
         "content" : content ,
-        "board_type" : "free",
+        "board_type" : "notice",
 
       })
     })
